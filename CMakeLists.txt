@@ -45,6 +45,7 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang")
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -fcolor-diagnostics")
 endif(CMAKE_C_COMPILER_ID MATCHES "Clang")
 
+target_link_libraries(octaspire-easing m)
 install(TARGETS octaspire-easing DESTINATION bin)
 
 add_custom_target(

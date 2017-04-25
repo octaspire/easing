@@ -17,4 +17,6 @@ if(OCTASPIRE_easing_COVERAGE)
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} --coverage")
 endif(OCTASPIRE_easing_COVERAGE)
 
+target_link_libraries(octaspire-easing-test-runner octaspire-easing)
+
 add_test(octaspire-easing-test-runner octaspire-easing-test-runner)
