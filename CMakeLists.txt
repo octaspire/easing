@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 2.8.12)
+project(octaspire-easing C)
 
 set(OCTASPIRE_EASING_CONFIG_VERSION_MAJOR 0)
-set(OCTASPIRE_EASING_CONFIG_VERSION_MINOR 2)
+set(OCTASPIRE_EASING_CONFIG_VERSION_MINOR 3)
 set(OCTASPIRE_EASING_CONFIG_VERSION_PATCH 0)
+
+message("== Building ${PROJECT_NAME} ${OCTASPIRE_EASING_CONFIG_VERSION_MAJOR}.${OCTASPIRE_EASING_CONFIG_VERSION_MINOR}.${OCTASPIRE_EASING_CONFIG_VERSION_PATCH}")
 
 set(OCTASPIRE_EASING_CONFIG_TEST_RES_PATH "${CMAKE_CURRENT_SOURCE_DIR}/test/resource/")
 
@@ -14,8 +17,7 @@ if(NOT CMAKE_BUILD_TYPE)
         "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel. " FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-project(octaspire-easing C)
-message("== Build type is ${CMAKE_BUILD_TYPE}")
+message("== Build type of ${PROJECT_NAME} is ${CMAKE_BUILD_TYPE}")
 
 file(GLOB SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 file(GLOB HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/octaspire/easing/*.h")
@@ -23,12 +25,19 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include/")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
 
-option(OCTASPIRE_EASING_COVERAGE "OCTASPIRE_EASING_COVERAGE" OFF)
+option(OCTASPIRE_EASING_COVERAGE  "OCTASPIRE_EASING_COVERAGE"  OFF)
+option(OCTASPIRE_EASING_UNIT_TEST "OCTASPIRE_EASING_UNIT_TEST" ON)
 
 if(OCTASPIRE_EASING_COVERAGE)
-    message("== Code coverage enabled")
+    message("== Code coverage enabled for ${PROJECT_NAME}")
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} --coverage")
 endif(OCTASPIRE_EASING_COVERAGE)
+
+if(OCTASPIRE_EASING_UNIT_TEST)
+    message("== Unit testing enabled for ${PROJECT_NAME}")
+else()
+    message("== Unit testing disabled for ${PROJECT_NAME}")
+endif(OCTASPIRE_EASING_UNIT_TEST)
 
 add_library(octaspire-easing STATIC ${SOURCES})
 set_property(TARGET octaspire-easing PROPERTY C_STANDARD 99)
@@ -58,7 +67,10 @@ add_custom_target(
     vera-easing
     COMMAND vera++ --error ${SOURCES} ${HEADERS})
 
-enable_testing()
-include(CTest)
-add_subdirectory(test)
+if(NOT TARGET octaspire-easing-test-runner AND OCTASPIRE_EASING_UNIT_TEST)
+    message("== Building of unit tests enabled for ${PROJECT_NAME}")
+    enable_testing()
+    include(CTest)
+    add_subdirectory(test)
+endif(NOT TARGET octaspire-easing-test-runner AND OCTASPIRE_EASING_UNIT_TEST)
 
