@@ -3,7 +3,7 @@ project(octaspire-easing C)
 
 set(OCTASPIRE_EASING_CONFIG_VERSION_MAJOR 0)
 set(OCTASPIRE_EASING_CONFIG_VERSION_MINOR 3)
-set(OCTASPIRE_EASING_CONFIG_VERSION_PATCH 0)
+set(OCTASPIRE_EASING_CONFIG_VERSION_PATCH 1)
 
 message("== Building ${PROJECT_NAME} ${OCTASPIRE_EASING_CONFIG_VERSION_MAJOR}.${OCTASPIRE_EASING_CONFIG_VERSION_MINOR}.${OCTASPIRE_EASING_CONFIG_VERSION_PATCH}")
 
@@ -55,7 +55,7 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang")
 endif(CMAKE_C_COMPILER_ID MATCHES "Clang")
 
 target_link_libraries(octaspire-easing m)
-install(TARGETS octaspire-easing DESTINATION bin)
+install(TARGETS octaspire-easing DESTINATION lib)
 
 add_custom_target(
     cppcheck-easing
