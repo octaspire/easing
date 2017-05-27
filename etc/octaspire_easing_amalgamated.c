@@ -89,10 +89,10 @@ are permitted provided that the following conditions are met:
 #define OCTASPIRE_EASING_CONFIG_H
 
 #define OCTASPIRE_EASING_CONFIG_VERSION_MAJOR "0"
-#define OCTASPIRE_EASING_CONFIG_VERSION_MINOR "3"
+#define OCTASPIRE_EASING_CONFIG_VERSION_MINOR "5"
 #define OCTASPIRE_EASING_CONFIG_VERSION_PATCH "1"
 
-#define OCTASPIRE_EASING_CONFIG_VERSION_STR   "Octaspire Easing version 0.3.1"
+#define OCTASPIRE_EASING_CONFIG_VERSION_STR   "Octaspire Easing version 0.5.1"
 
 
 #endif
